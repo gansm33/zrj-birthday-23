@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f0e4">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="送给二十三岁的你，一份温柔的生日礼物。">
+  <title>二十三岁，生日快乐</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <nav class="chapter-nav" aria-label="章节导航">
+    <button class="nav-dot is-active" data-target="hero" aria-label="前往生日祝福"><span>01</span></button>
+    <button class="nav-dot" data-target="album" aria-label="前往照片故事"><span>02</span></button>
+    <button class="nav-dot" data-target="letter" aria-label="前往祝福信"><span>03</span></button>
+  </nav>
+
+  <main>
+    <section class="chapter hero" id="hero" aria-labelledby="hero-title">
+      <div class="sky-decor" aria-hidden="true"><i>✦</i><i>·</i><i>✧</i><i>⋆</i><i>✦</i></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">JULY 16 · FOR YOUR TWENTY-THREE</p>
+        <p class="mini-note">一封写给盛夏的生日请柬</p>
+        <h1 id="hero-title"><span>祝你</span>二十三岁<br>生日快乐</h1>
+        <p class="hero-wish">愿新一岁的每一天，都有鲜花、星光与好消息。</p>
+        <div class="countdown" id="countdown" aria-live="polite"></div>
+        <button class="primary-btn" id="celebrateBtn">点亮二十三岁 <span>✦</span></button>
+      </div>
+
+      <div class="cake-scene reveal" aria-label="一只插着二十三岁蜡烛的三层生日蛋糕">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <span class="floating-star s1">✦</span><span class="floating-star s2">✧</span><span class="floating-star s3">✦</span><span class="floating-star s4">✧</span><span class="floating-star s5">⋆</span><span class="floating-star s6">✦</span>
+        <span class="party-pop pop-one" aria-hidden="true">✦ · ❀ · ✧</span><span class="party-pop pop-two" aria-hidden="true">✧ · ✦ · ⋆</span>
+        <div class="cake">
+          <div class="number-candles"><span>2<i></i></span><span>3<i></i></span></div>
+          <div class="cake-tier tier-top"><div class="tier-icing"><i></i><i></i><i></i></div><b class="daisy">✿</b></div>
+          <div class="cake-tier tier-middle"><div class="tier-icing"><i></i><i></i><i></i><i></i></div><b class="berry-dot one"></b><b class="berry-dot two"></b><b class="berry-dot three"></b></div>
+          <div class="cake-tier tier-bottom"><div class="tier-icing"><i></i><i></i><i></i><i></i><i></i></div><em>23</em><span class="gold-beads">• · • · • · • · •</span></div>
+          <div class="plate"></div>
+        </div>
+        <p class="cake-caption">许一个愿吧<br><small>它正悄悄向你走来</small></p>
+      </div>
+      <button class="scroll-hint" data-target="album">翻开下一页 <span>↓</span></button>
+    </section>
+
+    <section class="chapter album" id="album" aria-labelledby="album-title">
+      <header class="section-head reveal">
+        <p class="eyebrow">CHAPTER TWO · ABOUT HER</p>
+        <h2 id="album-title">二十三岁的你，<br>有很多美好的名字</h2>
+        <p>花、海风、笑声与毕业季——每一张都记录着闪闪发光的你。</p>
+      </header>
+
+      <div class="story-layout">
+        <article class="portrait-card reveal">
+          <div class="portrait-wrap"><img src="assets/illustration-girl.png" alt="根据照片创作的温柔手绘人物形象"></div>
+          <p class="hand-note">“愿你永远有奔向远方的勇气，<br>也有被温柔接住的幸运。”</p>
+          <span class="tape" aria-hidden="true"></span>
+        </article>
+        <div class="traits-zone">
+          <div class="traits" id="traits"></div>
+        </div>
+      </div>
+
+      <div class="gallery-head reveal"><p class="eyebrow">A LITTLE ALBUM</p><h3>把珍贵的瞬间，都留在这里</h3><span>点击照片，可以认真看一会儿</span></div>
+      <div class="gallery" id="gallery"></div>
+      <button class="next-chapter" data-target="letter">去读那封信 <span>→</span></button>
+    </section>
+
+    <section class="chapter letter" id="letter" aria-labelledby="letter-title">
+      <div class="letter-intro reveal">
+        <p class="eyebrow">CHAPTER THREE · A LETTER FOR YOU</p>
+        <h2 id="letter-title">有些祝福，<br>想慢慢说给你听</h2>
+        <p>这封信可以直接修改。写下真正想对她说的话，浏览器会替你悄悄保存。</p>
+        <div class="edit-tip"><span>✎</span><div><b>点击信纸即可编辑</b><small id="saveStatus">内容会自动保存在这台电脑</small></div></div>
+      </div>
+      <div class="letter-atmosphere" aria-hidden="true"><i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i><i class="soft-star st1">✦</i><i class="soft-star st2">✧</i><i class="soft-star st3">⋆</i><i class="light-orb o1"></i><i class="light-orb o2"></i><i class="hand-line line1"></i><i class="hand-line line2"></i></div>
+      <div class="letter-stage reveal" id="letterStage">
+        <button class="envelope" id="openLetterBtn" aria-expanded="false" aria-controls="letterPaper">
+          <span class="envelope-back"></span><span class="letter-peek"><small>FOR YOU · 07 / 16</small></span><span class="envelope-flap"></span><span class="envelope-front"></span><span class="envelope-seal">✦</span><span class="envelope-instruction">点击拆开这封信</span>
+        </button>
+        <article class="paper" id="letterPaper" aria-hidden="true" tabindex="-1">
+          <div class="paper-top"><span>TO · <b id="letterName"></b></span><time>07 / 16</time></div>
+          <div class="letter-body" id="letterBody" contenteditable="true" spellcheck="false" aria-label="可编辑的生日祝福信"></div>
+          <p class="signature">—— <span id="signature" contenteditable="true"></span></p>
+          <p class="story-begins" id="storyBegins">故事没有结束，二十三岁才刚刚开始。</p>
+          <div class="paper-flower" aria-hidden="true">❀</div>
+        </article>
+      </div>
+      <div class="finale reveal">
+        <p>愿二十三岁的风，吹来数不清的好消息。</p>
+        <button class="secondary-btn" id="replayBtn">再看一次礼花 ✦</button>
+        <small>HAPPY BIRTHDAY · HAPPY GRADUATION · GOOD LUCK</small>
+      </div>
+    </section>
+  </main>
+
+  <div class="secret-toast" id="secretToast" role="status" aria-live="polite"></div>
+  <dialog id="lightbox"><button id="closeLightbox" aria-label="关闭大图">×</button><img src="" alt=""><p></p></dialog>
+  <script src="birthday-profile.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
