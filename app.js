@@ -5,8 +5,10 @@ const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 function renderProfile() {
   $('#letterName').textContent = profile.displayName;
   $('#signature').textContent = localStorage.getItem('zrj-signature') || profile.signature;
-  $('#traits').innerHTML = profile.traits.map(t => `<article class="trait reveal"><div class="trait-copy"><i>${t.icon}</i><h3>${t.title}</h3><p>${t.text}</p></div><figure class="trait-illustration"><img src="${t.image}" alt="${t.alt}" loading="lazy"></figure></article>`).join('');
-  $('#gallery').innerHTML = profile.photos.map((photo, i) => `<button class="photo-card reveal" data-index="${i}" aria-label="查看大图：${photo.caption}"><img src="${photo.src}" alt="${photo.alt}" loading="lazy"><p>${photo.caption}</p></button>`).join('');
+  $('#traits').innerHTML = profile.traits.map(t => `<article class="trait reveal"><div class="trait-copy"><i>${t.icon}</i><h3>${t.title}</h3><p>${t.text}</p></div><figure class="trait-illustration"><img src="${t.image}" alt="${t.alt}" loading="lazy" decoding="async" width="1100" height="1100"></figure></article>`).join('');
+  $('#gallery').innerHTML = profile.photos.map((photo, i) => `<button class="photo-card reveal" data-index="${i}" aria-label="查看大图：${photo.caption}"><img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async"><p>${photo.caption}</p></button>`).join('');
+  const symbols = ['✦', '❀', '·'];
+  $('#fortuneGrid').innerHTML = profile.fortunes.map((fortune, i) => `<button class="fortune-item reveal" data-index="${i}" aria-pressed="false"><span class="fortune-symbol type-${i % 3}">${symbols[i % 3]}</span><small>${String(i + 1).padStart(2, '0')}</small><b>${fortune}</b></button>`).join('');
   const saved = localStorage.getItem('zrj-letter-v23');
   $('#letterBody').innerHTML = saved || profile.letter.map(p => `<p>${p}</p>`).join('');
 }
@@ -79,6 +81,73 @@ function setupLetterReveal() {
   }, { once: true });
 }
 
+function setupWishBottle() {
+  const paper = $('#wishPaper');
+  const text = $('#wishText');
+  const counter = $('#wishCounter');
+  const button = $('#drawWishBtn');
+  let deck = [];
+  let drawn = 0;
+
+  const refill = () => {
+    deck = [...profile.bottleWishes].sort(() => Math.random() - .5).concat(profile.specialWish);
+    drawn = 0;
+    counter.textContent = `瓶中有 ${deck.length} 张祝福纸条`;
+    button.innerHTML = '抽一张祝福 <span>✦</span>';
+  };
+
+  button.addEventListener('click', () => {
+    if (drawn >= deck.length) refill();
+    const wish = deck[drawn++];
+    paper.classList.remove('is-drawn', 'is-special');
+    void paper.offsetWidth;
+    text.textContent = wish;
+    paper.classList.add('is-drawn');
+    const remaining = deck.length - drawn;
+    if (!remaining) {
+      paper.classList.add('is-special');
+      counter.textContent = '最后一张特别纸条已经送达';
+      button.innerHTML = '重新装满愿望瓶 <span>↻</span>';
+    } else {
+      counter.textContent = `瓶中还有 ${remaining} 张祝福纸条`;
+    }
+  });
+
+  refill();
+}
+
+function setupFortunes() {
+  const items = $$('.fortune-item');
+  const count = $('#luckCount');
+  const bar = $('#luckProgressBar');
+  const complete = $('#allLitMessage');
+  let lit = 0;
+
+  items.forEach(item => item.addEventListener('click', () => {
+    if (item.classList.contains('is-lit')) return;
+    item.classList.add('is-lit');
+    item.setAttribute('aria-pressed', 'true');
+    lit += 1;
+    count.textContent = `已点亮 ${lit} / 23`;
+    bar.style.width = `${lit / 23 * 100}%`;
+    if (lit === 23) {
+      complete.classList.add('is-visible');
+      celebrate();
+      setTimeout(() => complete.scrollIntoView({ behavior: 'smooth', block: 'center' }), 350);
+    }
+  }));
+}
+
+function lightUpBirthday() {
+  const scene = $('#cakeScene');
+  scene.classList.remove('awaiting-light');
+  scene.classList.add('is-lit');
+  scene.setAttribute('aria-hidden', 'false');
+  $('.cake').setAttribute('tabindex', '0');
+  $('#celebrateBtn').innerHTML = '二十三岁已点亮 <span>✦</span>';
+  setTimeout(celebrate, 180);
+}
+
 function setupHiddenSurprises() {
   const toast = $('#secretToast');
   let toastTimer;
@@ -100,7 +169,7 @@ function setupHiddenSurprises() {
 
   let cakeClicks = 0;
   const cake = $('.cake');
-  cake.setAttribute('role', 'button'); cake.setAttribute('tabindex', '0'); cake.setAttribute('aria-label', '点击蛋糕收集好运');
+  cake.setAttribute('role', 'button'); cake.setAttribute('tabindex', $('#cakeScene').classList.contains('awaiting-light') ? '-1' : '0'); cake.setAttribute('aria-label', '点击蛋糕收集好运');
   const tapCake = () => { cakeClicks += 1; cake.classList.add('is-tapped'); setTimeout(() => cake.classList.remove('is-tapped'), 280); if (cakeClicks === 3) showSecret('恭喜你，成功收集了多份好运。'); };
   cake.addEventListener('click', tapCake);
   cake.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tapCake(); } });
@@ -120,6 +189,5 @@ function setupHiddenSurprises() {
   endingObserver.observe($('.signature'));
 }
 
-renderProfile(); updateCountdown(); setInterval(updateCountdown, 60000); setupReveal(); setupNavigation(); setupGallery(); setupEditing(); setupLetterReveal(); setupHiddenSurprises();
-$('#celebrateBtn').addEventListener('click', celebrate); $('#replayBtn').addEventListener('click', celebrate);
-setTimeout(celebrate, 600);
+renderProfile(); updateCountdown(); setInterval(updateCountdown, 60000); setupReveal(); setupNavigation(); setupGallery(); setupEditing(); setupLetterReveal(); setupWishBottle(); setupFortunes(); setupHiddenSurprises();
+$('#celebrateBtn').addEventListener('click', lightUpBirthday); $('#replayBtn').addEventListener('click', celebrate);

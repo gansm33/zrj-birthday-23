@@ -3,21 +3,39 @@ window.BIRTHDAY_PROFILE = {
   birthday: "2026-07-16T00:00:00+08:00",
   age: 23,
   traits: [
-    { icon: "✦", title: "善良", text: "把真诚留给身边的人，也让普通的日子有了暖意。", image: "assets/traits/kindness.png", alt: "在花丛中轻轻扶起花朵的手绘人物" },
-    { icon: "❀", title: "笑起来很好看", text: "像海面忽然接住阳光，让人也忍不住跟着开心。", image: "assets/traits/smile.png", alt: "迎着晨光和花瓣微笑的手绘人物" },
-    { icon: "☁", title: "温柔体贴", text: "懂得照顾别人的情绪，也有安静而坚定的力量。", image: "assets/traits/gentle.png", alt: "雨中为小猫撑伞的手绘人物" },
-    { icon: "↗", title: "一直很优秀", text: "认真走过每一步，未来也会去到更辽阔的地方。", image: "assets/traits/excellent.png", alt: "抱着书和花走向明亮远方的手绘人物" }
+    { icon: "✦", title: "善良", text: "把真诚留给身边的人，也让普通的日子有了暖意。", image: "assets/traits/kindness.webp", alt: "在花丛中轻轻扶起花朵的手绘人物" },
+    { icon: "❀", title: "笑起来很好看", text: "像海面忽然接住阳光，让人也忍不住跟着开心。", image: "assets/traits/smile.webp", alt: "迎着晨光和花瓣微笑的手绘人物" },
+    { icon: "☁", title: "温柔体贴", text: "懂得照顾别人的情绪，也有安静而坚定的力量。", image: "assets/traits/gentle.webp", alt: "雨中为小猫撑伞的手绘人物" },
+    { icon: "↗", title: "一直很优秀", text: "认真走过每一步，未来也会去到更辽阔的地方。", image: "assets/traits/excellent.webp", alt: "抱着书和花走向明亮远方的手绘人物" }
   ],
   photos: [
-    { src: "assets/photos/01-flower-wall.jpg", alt: "花墙前的生日女孩", caption: "花会沿路盛开，你也会。" },
-    { src: "assets/photos/02-seaside-smile.jpg", alt: "海边灿烂微笑", caption: "把这一刻的海风，收藏进二十三岁。" },
-    { src: "assets/photos/03-friends-by-sea.jpg", alt: "朋友们在海边的合照", caption: "一起笑过的日子，都在闪闪发光。" },
-    { src: "assets/photos/04-graduation-friends.jpg", alt: "毕业时和朋友的合照", caption: "毕业不是句号，是下一段故事的扉页。" },
-    { src: "assets/photos/05-graduation-sea.jpg", alt: "穿毕业服在海边捧花", caption: "海的那边，是刚刚开始的远方。" },
-    { src: "assets/photos/06-graduation-portrait.jpg", alt: "穿毕业服的笑容", caption: "这一程圆满，下一程依然勇敢。" },
-    { src: "assets/photos/07-summer-ride.jpg", alt: "夏日骑行时和朋友的合照", caption: "和喜欢的人一起，风里也全是快乐。" },
-    { src: "assets/photos/08-city-walk.jpg", alt: "城市旅行中的笑容", caption: "去看更大的世界，也收集沿途的小惊喜。" },
-    { src: "assets/photos/09-seaside-white-dress.jpg", alt: "穿白裙站在明亮的海边", caption: "海风里的你，明亮、自由，又有生命力。" }
+    { src: "assets/photos/01-flower-wall.webp", alt: "花墙前的生日女孩", caption: "花会沿路盛开，你也会。" },
+    { src: "assets/photos/02-seaside-smile.webp", alt: "海边灿烂微笑", caption: "把这一刻的海风，收藏进二十三岁。" },
+    { src: "assets/photos/03-friends-by-sea.webp", alt: "朋友们在海边的合照", caption: "一起笑过的日子，都在闪闪发光。" },
+    { src: "assets/photos/04-graduation-friends.webp", alt: "毕业时和朋友的合照", caption: "毕业不是句号，是下一段故事的扉页。" },
+    { src: "assets/photos/05-graduation-sea.webp", alt: "穿毕业服在海边捧花", caption: "海的那边，是刚刚开始的远方。" },
+    { src: "assets/photos/06-graduation-portrait.webp", alt: "穿毕业服的笑容", caption: "这一程圆满，下一程依然勇敢。" },
+    { src: "assets/photos/07-summer-ride.webp", alt: "夏日骑行时和朋友的合照", caption: "和喜欢的人一起，风里也全是快乐。" },
+    { src: "assets/photos/08-city-walk.webp", alt: "城市旅行中的笑容", caption: "去看更大的世界，也收集沿途的小惊喜。" },
+    { src: "assets/photos/09-seaside-white-dress.webp", alt: "穿白裙站在明亮的海边", caption: "海风里的你，明亮、自由，又有生命力。" }
+  ],
+  bottleWishes: [
+    "愿你一直拥有重新开始的勇气。",
+    "愿你的努力，都能得到温柔的回音。",
+    "愿你不必因为别人的目光而怀疑自己。",
+    "愿你可以勇敢表达自己的喜欢和不喜欢。",
+    "愿你不被年龄催促，按照自己的节奏慢慢成长。",
+    "愿你遇到困难时，也仍然相信自己值得拥有好结局。",
+    "愿你永远保留一点天真、一点好奇和一点勇敢。",
+    "愿二十三岁的你，比以前更加自由。",
+    "愿你想去的地方，最终都能抵达。",
+    "愿你成为自己喜欢的大人模样，而不是别人期待的大人。"
+  ],
+  specialWish: "今天抽到的不是祝福，是一个事实：你真的很值得被爱、被好好对待。",
+  fortunes: [
+    "平安", "健康", "快乐", "勇气", "自信", "自由", "真诚的朋友", "被理解", "被珍惜", "好的工作机会",
+    "顺利的毕业旅程", "稳定的内心", "清醒的判断", "表达自己的勇气", "拒绝不喜欢事物的底气", "面对变化的从容",
+    "好好休息的能力", "不被年龄催促", "持续热爱生活", "与自己和解", "遇见更广阔的世界", "成为喜欢的大人模样", "一个明亮而自由的未来"
   ],
   letter: [
     "见字如面。先祝你二十三岁生日快乐，也祝你毕业快乐！",

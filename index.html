@@ -15,7 +15,9 @@
   <nav class="chapter-nav" aria-label="章节导航">
     <button class="nav-dot is-active" data-target="hero" aria-label="前往生日祝福"><span>01</span></button>
     <button class="nav-dot" data-target="album" aria-label="前往照片故事"><span>02</span></button>
-    <button class="nav-dot" data-target="letter" aria-label="前往祝福信"><span>03</span></button>
+    <button class="nav-dot" data-target="wish-bottle" aria-label="前往二十三岁愿望瓶"><span>03</span></button>
+    <button class="nav-dot" data-target="lucky-stars" aria-label="前往二十三份好运"><span>04</span></button>
+    <button class="nav-dot" data-target="letter" aria-label="前往祝福信"><span>05</span></button>
   </nav>
 
   <main>
@@ -30,7 +32,7 @@
         <button class="primary-btn" id="celebrateBtn">点亮二十三岁 <span>✦</span></button>
       </div>
 
-      <div class="cake-scene reveal" aria-label="一只插着二十三岁蜡烛的三层生日蛋糕">
+      <div class="cake-scene reveal awaiting-light" id="cakeScene" aria-label="一只插着二十三岁蜡烛的三层生日蛋糕" aria-hidden="true">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
         <span class="floating-star s1">✦</span><span class="floating-star s2">✧</span><span class="floating-star s3">✦</span><span class="floating-star s4">✧</span><span class="floating-star s5">⋆</span><span class="floating-star s6">✦</span>
         <span class="party-pop pop-one" aria-hidden="true">✦ · ❀ · ✧</span><span class="party-pop pop-two" aria-hidden="true">✧ · ✦ · ⋆</span>
@@ -55,7 +57,7 @@
 
       <div class="story-layout">
         <article class="portrait-card reveal">
-          <div class="portrait-wrap"><img src="assets/illustration-girl.png" alt="根据照片创作的温柔手绘人物形象"></div>
+          <div class="portrait-wrap"><img src="assets/illustration-girl.webp" alt="根据照片创作的温柔手绘人物形象" loading="lazy" decoding="async" width="660" height="1100"></div>
           <p class="hand-note">“愿你永远有奔向远方的勇气，<br>也有被温柔接住的幸运。”</p>
           <span class="tape" aria-hidden="true"></span>
         </article>
@@ -66,12 +68,58 @@
 
       <div class="gallery-head reveal"><p class="eyebrow">A LITTLE ALBUM</p><h3>把珍贵的瞬间，都留在这里</h3><span>点击照片，可以认真看一会儿</span></div>
       <div class="gallery" id="gallery"></div>
+      <button class="next-chapter" data-target="wish-bottle">去抽一张祝福 <span>→</span></button>
+    </section>
+
+    <section class="chapter wish-bottle-section" id="wish-bottle" aria-labelledby="wish-bottle-title">
+      <header class="section-head wish-head reveal">
+        <p class="eyebrow">CHAPTER THREE · A BOTTLE OF WISHES</p>
+        <h2 id="wish-bottle-title">二十三岁愿望瓶</h2>
+        <p>瓶子里藏着一些写给二十三岁的温柔话语。轻轻点击，每次带走一张。</p>
+      </header>
+      <div class="wish-bottle-layout">
+        <div class="bottle-wrap reveal" aria-hidden="true">
+          <div class="bottle-glow"></div>
+          <div class="glass-bottle">
+            <div class="bottle-cork"></div>
+            <div class="bottle-neck"></div>
+            <div class="bottle-body">
+              <i class="bottle-star bs1">✦</i><i class="bottle-star bs2">✧</i><i class="bottle-star bs3">⋆</i><i class="bottle-star bs4">✦</i><i class="bottle-star bs5">✧</i>
+              <span class="rolled-note rn1"></span><span class="rolled-note rn2"></span><span class="rolled-note rn3"></span><span class="rolled-note rn4"></span>
+            </div>
+          </div>
+        </div>
+        <div class="wish-draw reveal">
+          <p class="wish-counter" id="wishCounter">瓶中有 11 张祝福纸条</p>
+          <article class="wish-paper" id="wishPaper" aria-live="polite">
+            <span class="wish-paper-star">✦</span>
+            <p id="wishText">点击下面的按钮，让一张祝福轻轻飘到你手中。</p>
+          </article>
+          <button class="primary-btn wish-btn" id="drawWishBtn">抽一张祝福 <span>✦</span></button>
+          <small>最后一张纸条，会有一点特别。</small>
+        </div>
+      </div>
+      <button class="next-chapter" data-target="lucky-stars">去点亮二十三份好运 <span>→</span></button>
+    </section>
+
+    <section class="chapter lucky-stars-section" id="lucky-stars" aria-labelledby="lucky-stars-title">
+      <header class="section-head luck-head reveal">
+        <p class="eyebrow">CHAPTER FOUR · 23 LITTLE LIGHTS</p>
+        <h2 id="lucky-stars-title">点亮属于你的<br>二十三份好运</h2>
+        <p>每一颗星、每一片花瓣和每一个小光点，都装着一份走进新章节的祝愿。</p>
+      </header>
+      <div class="luck-progress reveal"><span id="luckCount">已点亮 0 / 23</span><div><i id="luckProgressBar"></i></div></div>
+      <div class="fortune-grid" id="fortuneGrid"></div>
+      <div class="all-lit-message" id="allLitMessage" role="status" aria-live="polite">
+        <span>✦</span>
+        <p>二十三份好运已经全部送达，<br>愿你带着它们，走进人生新的章节。</p>
+      </div>
       <button class="next-chapter" data-target="letter">去读那封信 <span>→</span></button>
     </section>
 
     <section class="chapter letter" id="letter" aria-labelledby="letter-title">
       <div class="letter-intro reveal">
-        <p class="eyebrow">CHAPTER THREE · A LETTER FOR YOU</p>
+        <p class="eyebrow">CHAPTER FIVE · A LETTER FOR YOU</p>
         <h2 id="letter-title">有些祝福，<br>想慢慢说给你听</h2>
         <p>这封信可以直接修改。写下真正想对她说的话，浏览器会替你悄悄保存。</p>
         <div class="edit-tip"><span>✎</span><div><b>点击信纸即可编辑</b><small id="saveStatus">内容会自动保存在这台电脑</small></div></div>
