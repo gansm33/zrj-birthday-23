@@ -121,8 +121,7 @@
       <div class="letter-intro reveal">
         <p class="eyebrow">CHAPTER FIVE · A LETTER FOR YOU</p>
         <h2 id="letter-title">有些祝福，<br>想慢慢说给你听</h2>
-        <p>拆开信封后，点击信纸上方的“开始编辑”，就可以基于原文慢慢修改。</p>
-        <div class="edit-tip"><span>✎</span><div><b>支持编辑、自动保存和恢复原文</b><small id="saveStatus">修改内容只保存在当前浏览器</small></div></div>
+        <p>这是为你认真写下的一封信。拆开信封，让这些祝福慢慢抵达。</p>
       </div>
       <div class="letter-atmosphere" aria-hidden="true"><i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i><i class="soft-star st1">✦</i><i class="soft-star st2">✧</i><i class="soft-star st3">⋆</i><i class="light-orb o1"></i><i class="light-orb o2"></i><i class="hand-line line1"></i><i class="hand-line line2"></i></div>
       <div class="letter-stage reveal" id="letterStage">
@@ -131,13 +130,8 @@
         </button>
         <article class="paper" id="letterPaper" aria-hidden="true" tabindex="-1">
           <div class="paper-top"><span>TO · <b id="letterName"></b></span><time>07 / 16</time></div>
-          <div class="paper-edit-bar" aria-label="信件编辑工具">
-            <button id="editLetterBtn" type="button" aria-pressed="false">✎ 开始编辑</button>
-            <button id="resetLetterBtn" type="button">恢复原文</button>
-            <small>编辑后会自动保存在这台设备</small>
-          </div>
-          <div class="letter-body" id="letterBody" contenteditable="false" spellcheck="false" aria-label="生日祝福信正文"></div>
-          <p class="signature">—— <span id="signature" contenteditable="false"></span></p>
+          <div class="letter-body" id="letterBody" aria-label="生日祝福信正文"></div>
+          <p class="signature">—— <span id="signature"></span></p>
           <p class="story-begins" id="storyBegins">故事没有结束，二十三岁才刚刚开始。</p>
           <div class="paper-flower" aria-hidden="true">❀</div>
         </article>

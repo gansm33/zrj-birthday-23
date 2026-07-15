@@ -4,13 +4,12 @@ const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 
 function renderProfile() {
   $('#letterName').textContent = profile.displayName;
-  $('#signature').textContent = localStorage.getItem('zrj-signature') || profile.signature;
+  $('#signature').textContent = profile.signature;
   $('#traits').innerHTML = profile.traits.map(t => `<article class="trait reveal"><div class="trait-copy"><i>${t.icon}</i><h3>${t.title}</h3><p>${t.text}</p></div><figure class="trait-illustration"><img src="${t.image}" alt="${t.alt}" loading="lazy" decoding="async" width="1100" height="1100"></figure></article>`).join('');
   $('#gallery').innerHTML = profile.photos.map((photo, i) => `<button class="photo-card reveal" data-index="${i}" aria-label="查看大图：${photo.caption}"><img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async"><p>${photo.caption}</p></button>`).join('');
   const symbols = ['✦', '❀', '·'];
   $('#fortuneGrid').innerHTML = profile.fortunes.map((fortune, i) => `<button class="fortune-item reveal" data-index="${i}" aria-pressed="false"><span class="fortune-symbol type-${i % 3}">${symbols[i % 3]}</span><small>${String(i + 1).padStart(2, '0')}</small><b>${fortune}</b></button>`).join('');
-  const saved = localStorage.getItem('zrj-letter-v23');
-  $('#letterBody').innerHTML = saved || profile.letter.map(p => `<p>${p}</p>`).join('');
+  $('#letterBody').innerHTML = profile.letter.map(p => `<p>${p}</p>`).join('');
 }
 
 function updateCountdown() {
@@ -81,58 +80,6 @@ function setupGallery() {
   }));
   $('#closeLightbox').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
-}
-
-function setupEditing() {
-  const body = $('#letterBody');
-  const signature = $('#signature');
-  const editButton = $('#editLetterBtn');
-  const resetButton = $('#resetLetterBtn');
-  const paper = $('#letterPaper');
-  let timer;
-  let resetTimer;
-  let editing = false;
-  const save = () => {
-    localStorage.setItem('zrj-letter-v23', body.innerHTML);
-    localStorage.setItem('zrj-signature', signature.textContent.trim());
-    $('#saveStatus').textContent = '已自动保存 ✓';
-  };
-  const setEditing = enabled => {
-    editing = enabled;
-    body.contentEditable = String(enabled);
-    signature.contentEditable = String(enabled);
-    paper.classList.toggle('is-editing', enabled);
-    editButton.setAttribute('aria-pressed', String(enabled));
-    editButton.textContent = enabled ? '✓ 完成编辑' : '✎ 开始编辑';
-    $('#saveStatus').textContent = enabled ? '现在可以直接修改正文和署名' : '修改内容只保存在当前浏览器';
-    if (enabled) setTimeout(() => body.focus({ preventScroll: true }), 50);
-    else save();
-  };
-
-  [body, signature].forEach(el => el.addEventListener('input', () => {
-    $('#saveStatus').textContent = '正在保存…';
-    clearTimeout(timer);
-    timer = setTimeout(save, 450);
-  }));
-
-  editButton.addEventListener('click', () => setEditing(!editing));
-  resetButton.addEventListener('click', () => {
-    if (!resetButton.classList.contains('is-confirming')) {
-      resetButton.classList.add('is-confirming');
-      resetButton.textContent = '再次点击确认恢复';
-      clearTimeout(resetTimer);
-      resetTimer = setTimeout(() => { resetButton.classList.remove('is-confirming'); resetButton.textContent = '恢复原文'; }, 4200);
-      return;
-    }
-    clearTimeout(resetTimer);
-    localStorage.removeItem('zrj-letter-v23');
-    localStorage.removeItem('zrj-signature');
-    body.innerHTML = profile.letter.map(p => `<p>${p}</p>`).join('');
-    signature.textContent = profile.signature;
-    resetButton.classList.remove('is-confirming');
-    resetButton.textContent = '恢复原文';
-    $('#saveStatus').textContent = '已经恢复为网页预设原文 ✓';
-  });
 }
 
 function setupLetterReveal() {
@@ -255,5 +202,5 @@ function setupHiddenSurprises() {
   endingObserver.observe($('.signature'));
 }
 
-renderProfile(); updateCountdown(); setInterval(updateCountdown, 60000); setupReveal(); setupNavigation(); setupGallery(); setupEditing(); setupLetterReveal(); setupWishBottle(); setupFortunes(); setupHiddenSurprises();
+renderProfile(); updateCountdown(); setInterval(updateCountdown, 60000); setupReveal(); setupNavigation(); setupGallery(); setupLetterReveal(); setupWishBottle(); setupFortunes(); setupHiddenSurprises();
 $('#celebrateBtn').addEventListener('click', lightUpBirthday); $('#replayBtn').addEventListener('click', celebrate);
