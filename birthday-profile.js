@@ -4,8 +4,8 @@ window.BIRTHDAY_PROFILE = {
   age: 23,
   traits: [
     { icon: "✦", title: "善良", text: "把真诚留给身边的人，也让普通的日子有了暖意。", image: "assets/traits/kindness.webp", alt: "在花丛中轻轻扶起花朵的手绘人物" },
-    { icon: "❀", title: "笑起来很好看", text: "像海面忽然接住阳光，让人也忍不住跟着开心。", image: "assets/traits/smile.webp", alt: "迎着晨光和花瓣微笑的手绘人物" },
-    { icon: "☁", title: "温柔体贴", text: "懂得照顾别人的情绪，也有安静而坚定的力量。", image: "assets/traits/gentle.webp", alt: "雨中为小猫撑伞的手绘人物" },
+    { icon: "❀", title: "笑起来很好看", text: "你的笑容里有一种自然的明亮，轻轻一笑，也会让身边的人跟着放松下来。", image: "assets/traits/smile.webp", alt: "迎着晨光和花瓣微笑的手绘人物" },
+    { icon: "☁", title: "温柔体贴", text: "懂得照顾别人的情绪，也有安静而坚定的力量。", image: "assets/traits/gentle-seaside.webp", alt: "在海边花野中回眸微笑的白裙手绘人物" },
     { icon: "↗", title: "一直很优秀", text: "认真走过每一步，未来也会去到更辽阔的地方。", image: "assets/traits/excellent.webp", alt: "抱着书和花走向明亮远方的手绘人物" }
   ],
   photos: [

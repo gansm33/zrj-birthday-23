@@ -35,11 +35,31 @@ function setupReveal() {
 }
 
 function setupNavigation() {
-  $$('[data-target]').forEach(btn => btn.addEventListener('click', () => document.getElementById(btn.dataset.target).scrollIntoView({ behavior: 'smooth' })));
-  const io = new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) $$('.nav-dot').forEach(dot => dot.classList.toggle('is-active', dot.dataset.target === e.target.id));
-  }), { threshold: .55 });
-  $$('.chapter').forEach(section => io.observe(section));
+  const chapters = $$('.chapter');
+  const setActive = id => $$('.nav-dot').forEach(dot => dot.classList.toggle('is-active', dot.dataset.target === id));
+  let ticking = false;
+  let settleTimer;
+  const updateActive = () => {
+    const focusLine = innerHeight * .42;
+    let current = chapters[0];
+    chapters.forEach(section => { if (section.getBoundingClientRect().top <= focusLine) current = section; });
+    setActive(current.id);
+    ticking = false;
+  };
+  const requestUpdate = () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(updateActive); }
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(updateActive, 120);
+  };
+
+  $$('[data-target]').forEach(btn => btn.addEventListener('click', () => {
+    setActive(btn.dataset.target);
+    document.getElementById(btn.dataset.target).scrollIntoView({ behavior: 'smooth' });
+  }));
+  addEventListener('scroll', requestUpdate, { passive: true });
+  addEventListener('scrollend', updateActive);
+  addEventListener('resize', requestUpdate);
+  updateActive();
 }
 
 function celebrate() {
@@ -64,9 +84,55 @@ function setupGallery() {
 }
 
 function setupEditing() {
+  const body = $('#letterBody');
+  const signature = $('#signature');
+  const editButton = $('#editLetterBtn');
+  const resetButton = $('#resetLetterBtn');
+  const paper = $('#letterPaper');
   let timer;
-  const save = () => { localStorage.setItem('zrj-letter-v23', $('#letterBody').innerHTML); localStorage.setItem('zrj-signature', $('#signature').textContent.trim()); $('#saveStatus').textContent = '已自动保存 ✓'; };
-  [$('#letterBody'), $('#signature')].forEach(el => el.addEventListener('input', () => { $('#saveStatus').textContent = '正在保存…'; clearTimeout(timer); timer = setTimeout(save, 450); }));
+  let resetTimer;
+  let editing = false;
+  const save = () => {
+    localStorage.setItem('zrj-letter-v23', body.innerHTML);
+    localStorage.setItem('zrj-signature', signature.textContent.trim());
+    $('#saveStatus').textContent = '已自动保存 ✓';
+  };
+  const setEditing = enabled => {
+    editing = enabled;
+    body.contentEditable = String(enabled);
+    signature.contentEditable = String(enabled);
+    paper.classList.toggle('is-editing', enabled);
+    editButton.setAttribute('aria-pressed', String(enabled));
+    editButton.textContent = enabled ? '✓ 完成编辑' : '✎ 开始编辑';
+    $('#saveStatus').textContent = enabled ? '现在可以直接修改正文和署名' : '修改内容只保存在当前浏览器';
+    if (enabled) setTimeout(() => body.focus({ preventScroll: true }), 50);
+    else save();
+  };
+
+  [body, signature].forEach(el => el.addEventListener('input', () => {
+    $('#saveStatus').textContent = '正在保存…';
+    clearTimeout(timer);
+    timer = setTimeout(save, 450);
+  }));
+
+  editButton.addEventListener('click', () => setEditing(!editing));
+  resetButton.addEventListener('click', () => {
+    if (!resetButton.classList.contains('is-confirming')) {
+      resetButton.classList.add('is-confirming');
+      resetButton.textContent = '再次点击确认恢复';
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => { resetButton.classList.remove('is-confirming'); resetButton.textContent = '恢复原文'; }, 4200);
+      return;
+    }
+    clearTimeout(resetTimer);
+    localStorage.removeItem('zrj-letter-v23');
+    localStorage.removeItem('zrj-signature');
+    body.innerHTML = profile.letter.map(p => `<p>${p}</p>`).join('');
+    signature.textContent = profile.signature;
+    resetButton.classList.remove('is-confirming');
+    resetButton.textContent = '恢复原文';
+    $('#saveStatus').textContent = '已经恢复为网页预设原文 ✓';
+  });
 }
 
 function setupLetterReveal() {
